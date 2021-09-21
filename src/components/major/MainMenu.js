@@ -6,9 +6,12 @@ import { faHome, faPlus, faCheck, faTimes } from '@fortawesome/free-solid-svg-ic
 
 import * as api from '../../api/index'
 
+import AppContext from '../../AppContext'
+
 
 const MainMenu = ({ additionMode, setAdditionMode, playlistsInAdditionMode, setPlaylistsInAdditionMode, myPlaylists, setMyPlaylists, showPlaylists, setShowPlaylists, innerWidth }) => {
   const history = useHistory()
+  const { userName } = useContext(AppContext)  
 
   const handlePlaylistAddition = (name) => {
     const playlists = new Set(playlistsInAdditionMode)
@@ -37,7 +40,7 @@ const MainMenu = ({ additionMode, setAdditionMode, playlistsInAdditionMode, setP
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await api.getMyPlaylists('konychevaleksei')
+      const response = await api.getMyPlaylists(userName)
       setMyPlaylists(response.data)
     }
 
