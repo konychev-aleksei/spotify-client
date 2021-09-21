@@ -8,7 +8,7 @@ export const getToken = () => {
 }
 
 export const deleteToken = () => {
-  return window.sessionStorage.removeItem("auth")
+  window.sessionStorage.removeItem("auth")
 }
 
 export const createAccount = async (userName) => {
