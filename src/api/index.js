@@ -4,11 +4,11 @@ const baseDomain = 'https://sp0tify.herokuapp.com', method = 'POST'
 
 
 export const getToken = () => {
-  return window.localStorage.getItem("auth")
+  return window.sessionStorage.getItem("auth")
 }
 
 export const deleteToken = () => {
-  window.localStorage.removeItem("auth")
+  window.sessionStorage.removeItem("auth")
 }
 
 export const createAccount = async (userName) => {
