@@ -11,7 +11,7 @@ const BestResult = ({ trackInfo, toggleTrack, playing, currentTrackId }) => {
   return(
     <div>
       <img src={ thumb } alt="" />
-      <button onClick={ () => toggleTrack(trackInfo) } class="round">
+      <button onClick={ () => toggleTrack(trackInfo) } className="round">
         {
           playing && isCurrentTrack ?
           <FontAwesomeIcon icon={ faPause } />
