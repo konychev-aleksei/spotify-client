@@ -62,8 +62,8 @@ const MainMenu = ({ additionMode, setAdditionMode, playlistsInAdditionMode, setP
       {
         showPlaylists ?
         <>
-          <div class="menu">
-            <div class="main-menu">
+          <div className="menu">
+            <div className="main-menu">
               <button onClick={ () => history.push('/') }>
                 <FontAwesomeIcon icon={ faHome } />
                 &nbsp;&nbsp;&nbsp;HOME
@@ -73,7 +73,7 @@ const MainMenu = ({ additionMode, setAdditionMode, playlistsInAdditionMode, setP
                 &nbsp;&nbsp;&nbsp;CREATE PLAYLIST
               </button>
             </div>
-            <div class="add-playlists">
+            <div className="add-playlists">
               {
                 additionMode.enabled ?
                 <>
@@ -90,14 +90,14 @@ const MainMenu = ({ additionMode, setAdditionMode, playlistsInAdditionMode, setP
           </div>
 
 
-          <div class="my-playlists">
+          <div className="my-playlists">
             {
               myPlaylists?.map((playlist, index) =>
                 <button onClick={ () => handlePlaylistClick(playlist) }>
                   { index === 0 ? <>Liked Tracks</> : playlist }
                   {
                     additionMode.enabled ?
-                    playlistsInAdditionMode.includes(playlist) ? <div class="add-here chosen" /> : <div class="add-here" />
+                    playlistsInAdditionMode.includes(playlist) ? <div className="add-here chosen" /> : <div className="add-here" />
                     : null
                   }
                 </button>
