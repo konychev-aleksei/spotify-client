@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import SwiperCore, { Navigation, Pagination } from 'swiper'
@@ -6,10 +6,12 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss'
 import 'swiper/components/pagination/pagination.scss'
 
+import AppContext from '../../AppContext'
+
 
 const SwipingList = ({ content, playlist }) => {
   const history = useHistory()
-  const userName = 'konychevaleksei'
+  const { userName } = useContext(AppContext)
 
   return(
     <Swiper
@@ -48,7 +50,7 @@ const SwipingList = ({ content, playlist }) => {
             thumb = `/artists/${_id}.jpg`
           }
           else {
-            owner = `Author: ${ owner === 'konychevaleksei' ? 'You' : owner }`
+            owner = `Author: ${ owner === userName ? 'You' : owner }`
           }
 
 
