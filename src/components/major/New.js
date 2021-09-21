@@ -25,7 +25,7 @@ const New = ({ myPlaylists, setMyPlaylists }) => {
 
   const handlePlaylistCreation = async (e) => {
     e.preventDefault()
-    await api.createPlaylist(name, await cropImage(), userName)
+    await api.createPlaylist(name, await cropImage(), 'konychevaleksei')
     setMyPlaylists([...myPlaylists, name])
     history.push('/')
   }
