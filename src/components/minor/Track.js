@@ -1,7 +1,9 @@
-import React, { useState, memo } from 'react'
+import React, { useState, useContext } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+
+import AppContext from '../../AppContext'
 
 
 const ShowIcon = ({ playing, isCurrentTrack }) => {
@@ -20,10 +22,17 @@ const ShowIcon = ({ playing, isCurrentTrack }) => {
 
 const Track = ({ trackInfo, inMyPlaylist, index, toggleTrack, playing, setPlaying, currentTrackId, setAdditionMode, handleAddition }) => {
   const [visibleButton, setVisibleButton] = useState()
+  const { setShowPlaylists } = useContext(AppContext)
   const { _id, artists, name, duration, thumb } = trackInfo
 
   const handleTrack = (_id) => {
-    inMyPlaylist ? handleAddition(_id) : setAdditionMode({ enabled: true, _id })
+    if (inMyPlaylist) {
+      handleAddition(_id)
+    }
+    else {
+      setShowPlaylists(true)
+      setAdditionMode({ enabled: true, _id })
+    }
   }
 
   return(
