@@ -97,7 +97,7 @@ const App = () => {
 
     if (user) {
       user.getIdToken()
-        .then((idToken) => window.sessionStorage.setItem("auth", idToken))
+        .then((idToken) => window.localStorage.setItem("auth", idToken))
         .catch((e) => console.error(e))
 
       createAccount()
