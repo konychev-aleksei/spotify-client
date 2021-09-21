@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseDomain = 'https://localhost:5000', method = 'POST'
+const baseDomain = 'https://sp0tify.herokuapp.com', method = 'POST'
 
 
 export const getToken = () => {
