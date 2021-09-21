@@ -97,7 +97,7 @@ const App = () => {
 
     if (user) {
       user.getIdToken()
-        .then((idToken) => window.localStorage.setItem("auth", idToken))
+        .then((idToken) => window.sessionStorage.setItem("auth", idToken))
         .catch((e) => console.error(e))
 
       createAccount()
@@ -105,8 +105,18 @@ const App = () => {
   }, [user])
 
 
+  const value = {
+    currentPlaylist,
+    setCurrentPlaylist,
+    user: user?.displayName.split(' ')[0],
+    userName: user?.email?.replace('@gmail.com', ''),
+    showPlaylists,
+    setShowPlaylists
+  }
+
+
   return(
-    <AppContext.Provider value={{ currentPlaylist, setCurrentPlaylist, user: user?.displayName.split(' ')[0], userName: user?.email?.replace('@gmail.com', '') }}>
+    <AppContext.Provider value={ value }>
       {
         user || api.getToken() ?
         <>
@@ -164,14 +174,9 @@ const App = () => {
               setAdditionMode={ setAdditionMode }
               myPlaylists={ myPlaylists }
               setMyPlaylists={ setMyPlaylists }
-              showPlaylists={ showPlaylists }
-              setShowPlaylists={ setShowPlaylists }
               innerWidth={ innerWidth }
             />
-            <Topbar
-              showPlaylists={ showPlaylists }
-              setShowPlaylists={ setShowPlaylists }
-            />
+            <Topbar />
             <Playbar
               handlePlayback={ handlePlayback }
               currentTrack={ currentTrack }
