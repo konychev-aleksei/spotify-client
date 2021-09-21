@@ -55,7 +55,7 @@ const MainMenu = ({ additionMode, setAdditionMode, playlistsInAdditionMode, setP
     }
 
     fetchData()
-  }, [])
+  }, [userName])
 
   return(
     <>
