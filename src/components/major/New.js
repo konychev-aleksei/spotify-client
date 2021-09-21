@@ -76,11 +76,11 @@ const New = ({ myPlaylists, setMyPlaylists }) => {
           type="text"
           placeholder="Playlist title"
           onChange={ (e) => {
-            if (e.target.value.length <= 20 && !constraints.includes(e.target.value))
+            if (e.target.value.length <= 15 && !constraints.includes(e.target.value))
               setName(e.target.value)
           }}
         />
-        <p>{ name.length } / 20</p>
+        <p>{ name.length } / 15</p>
 
         <button style={{ backgroundColor: name && image && !myPlaylists.includes(name) ? '#1DB954' : '#1D1D1D' }}>
           Publish
