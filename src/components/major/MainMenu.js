@@ -9,9 +9,9 @@ import * as api from '../../api/index'
 import AppContext from '../../AppContext'
 
 
-const MainMenu = ({ additionMode, setAdditionMode, playlistsInAdditionMode, setPlaylistsInAdditionMode, myPlaylists, setMyPlaylists, showPlaylists, setShowPlaylists, innerWidth }) => {
+const MainMenu = ({ additionMode, setAdditionMode, playlistsInAdditionMode, setPlaylistsInAdditionMode, myPlaylists, setMyPlaylists, innerWidth }) => {
   const history = useHistory()
-  const { userName } = useContext(AppContext)  
+  const { userName, showPlaylists, setShowPlaylists } = useContext(AppContext)
 
   const handlePlaylistAddition = (name) => {
     const playlists = new Set(playlistsInAdditionMode)
@@ -30,12 +30,22 @@ const MainMenu = ({ additionMode, setAdditionMode, playlistsInAdditionMode, setP
   const handleDisableTracksAddition = async () => {
     setAdditionMode({ enabled: false, _id: null })
     setPlaylistsInAdditionMode([])
+
+    if (innerWidth <= 950) {
+      setShowPlaylists(false)
+    }
   }
 
   const handlePlaylistClick = (name) => {
-    if (innerWidth <= 950)
-      setShowPlaylists(false)
-    additionMode.enabled ? handlePlaylistAddition(name) : history.push(`/playlist/${name}`)
+    if (additionMode.enabled) {
+      handlePlaylistAddition(name)
+    }
+    else {
+      if (innerWidth <= 950) {
+        setShowPlaylists(false)
+      }      
+      history.push(`/playlist/${name}`)
+    }
   }
 
   useEffect(() => {
