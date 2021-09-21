@@ -1,0 +1,101 @@
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome, faPlus, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+
+import * as api from '../../api/index'
+
+
+const MainMenu = ({ additionMode, setAdditionMode, playlistsInAdditionMode, setPlaylistsInAdditionMode, myPlaylists, setMyPlaylists, showPlaylists, setShowPlaylists, innerWidth }) => {
+  const history = useHistory()
+
+  const handlePlaylistAddition = (name) => {
+    const playlists = new Set(playlistsInAdditionMode)
+
+    playlists.has(name) ? playlists.delete(name) : playlists.add(name)
+    setPlaylistsInAdditionMode([...playlists])
+  }
+
+  const handleEnableTracksAddition = async () => {
+    playlistsInAdditionMode.forEach(async (playlist) => {
+      await api.addTrackToPlaylist(playlist, additionMode._id)
+    })
+    handleDisableTracksAddition()
+  }
+
+  const handleDisableTracksAddition = async () => {
+    setAdditionMode({ enabled: false, _id: null })
+    setPlaylistsInAdditionMode([])
+  }
+
+  const handlePlaylistClick = (name) => {
+    if (innerWidth <= 950)
+      setShowPlaylists(false)
+    additionMode.enabled ? handlePlaylistAddition(name) : history.push(`/playlist/${name}`)
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await api.getMyPlaylists('konychevaleksei')
+      setMyPlaylists(response.data)
+    }
+
+    fetchData()
+  }, [])
+
+  return(
+    <>
+      {
+        showPlaylists ?
+        <>
+          <div class="menu">
+            <div class="main-menu">
+              <button onClick={ () => history.push('/') }>
+                <FontAwesomeIcon icon={ faHome } />
+                &nbsp;&nbsp;&nbsp;HOME
+              </button>
+              <button onClick={ () => history.push('/new') }>
+                <FontAwesomeIcon icon={ faPlus } />
+                &nbsp;&nbsp;&nbsp;CREATE PLAYLIST
+              </button>
+            </div>
+            <div class="add-playlists">
+              {
+                additionMode.enabled ?
+                <>
+                  <button onClick={ handleEnableTracksAddition }>
+                    <FontAwesomeIcon icon={ faCheck } />
+                  </button>
+                  <button onClick={ handleDisableTracksAddition }>
+                    <FontAwesomeIcon icon={ faTimes } />
+                  </button>
+                </>
+                : null
+              }
+            </div>
+          </div>
+
+
+          <div class="my-playlists">
+            {
+              myPlaylists?.map((playlist, index) =>
+                <button onClick={ () => handlePlaylistClick(playlist) }>
+                  { index === 0 ? <>Liked Tracks</> : playlist }
+                  {
+                    additionMode.enabled ?
+                    playlistsInAdditionMode.includes(playlist) ? <div class="add-here chosen" /> : <div class="add-here" />
+                    : null
+                  }
+                </button>
+              )
+            }
+          </div>
+        </>
+        : null
+      }
+    </>
+  )
+}
+
+export default MainMenu
