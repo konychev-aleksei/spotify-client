@@ -24,8 +24,7 @@ export const runSearch = async (query) => {
   return await axios({
     url: `${baseDomain}/post/runsearch`,
     method,
-    data: { query },
-    headers: { Authorization: `Bearer ${ getToken() }` }
+    data: { query }
   })
 }
 
@@ -33,8 +32,7 @@ export const getArtist = async (name) => {
   return await axios({
     url: `${baseDomain}/post/getartist`,
     method,
-    data: { name },
-    headers: { Authorization: `Bearer ${ getToken() }` }
+    data: { name }
   })
 }
 
@@ -42,8 +40,7 @@ export const getPlaylist = async (name) => {
   return await axios({
     url: `${baseDomain}/post/getplaylist`,
     method,
-    data: { name },
-    headers: { Authorization: `Bearer ${ getToken() }` }
+    data: { name }
   })
 }
 
