@@ -19,7 +19,7 @@ import AppContext from '../../AppContext'
 
 const MainPlaylistButton = ({ handlePlaylistListening, playing, response, currentTrackId }) => {
   return(
-    <button onClick={ handlePlaylistListening } class="round">
+    <button onClick={ handlePlaylistListening } className="round">
       {
         playing && response?.tracks?.length && response?.tracks?.map((item) => item._id).includes(currentTrackId) ?
         <FontAwesomeIcon icon={ faPause } />
@@ -33,7 +33,7 @@ const MainPlaylistButton = ({ handlePlaylistListening, playing, response, curren
 
 const PlaylistLikeButton = ({ playlist, isLikedTracks, liked, handleLike }) => {
   return(
-    <button onClick={ handleLike } class="round transparent">
+    <button onClick={ handleLike } className="round transparent">
       {
         liked || !playlist ?
         <FontAwesomeIcon style={{ color: isLikedTracks || !playlist ? '#555' : null }} icon={ faHeart } />
@@ -47,8 +47,8 @@ const PlaylistLikeButton = ({ playlist, isLikedTracks, liked, handleLike }) => {
 const Thumbs = ({ src }) => {
   return(
     <>
-      <img draggable="false" class="back" src={ src } />
-      <img draggable="false" class="front" src={ src } />
+      <img draggable="false" className="back" src={ src } />
+      <img draggable="false" className="front" src={ src } />
     </>
   )
 }
@@ -165,7 +165,7 @@ const Playlist = ({ playlist, playing, setPlaying, toggleTrack, currentTrackId, 
 
 
   return(
-    <div class="content">
+    <div className="content">
       {
         fetching ?
         <div className="fetching">
@@ -213,6 +213,7 @@ const Playlist = ({ playlist, playing, setPlaying, toggleTrack, currentTrackId, 
                             {...provided.dragHandleProps}
                           >
                             <Track
+                              key={ index }
                               playing={ playing }
                               setPlaying={ setPlaying }
                               index={ index }
