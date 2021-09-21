@@ -57,15 +57,15 @@ const Playbar = ({ audioRef, currentTrack, playing, setPlaying, handlePlayback, 
   }, [audioRef.current])
 
   return(
-    <div class="playbar">
+    <div className="playbar">
       <img src={ thumb } alt="" />
       <h1>{ name }</h1>
 
-      <p class="song-authors">{ artists }</p>
-      <button onClick={ playPrevious } class="controls rewind-backwards">
+      <p className="song-authors">{ artists }</p>
+      <button onClick={ playPrevious } className="controls rewind-backwards">
         <FontAwesomeIcon icon={ faFastBackward } />
       </button>
-      <button onClick={ handlePlayback } class="controls toggle-playback">
+      <button onClick={ handlePlayback } className="controls toggle-playback">
         {
           playing ?
           <FontAwesomeIcon icon={ faPause } />
@@ -73,14 +73,14 @@ const Playbar = ({ audioRef, currentTrack, playing, setPlaying, handlePlayback, 
           <FontAwesomeIcon icon={ faPlay } />
         }
       </button>
-      <button onClick={ playNext } class="controls rewind-forewards">
+      <button onClick={ playNext } className="controls rewind-forewards">
         <FontAwesomeIcon icon={ faFastForward } />
       </button>
 
       <input min="0" max="1000" step="1" type="range" value={ getInputValue() } onChange={ (e) => setInputValue(e) } />
 
-      <p class="song-authors current-time">{ getCurrentTime() }</p>
-      <p class="song-authors duration">{ duration }</p>
+      <p className="song-authors current-time">{ getCurrentTime() }</p>
+      <p className="song-authors duration">{ duration }</p>
     </div>
   )
 }
