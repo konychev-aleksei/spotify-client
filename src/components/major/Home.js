@@ -63,7 +63,7 @@ const Home = ({ setCurrentTrack, audioRef, playing, setPlaying, currentTrackId, 
   }
 
   return(
-    <div class="content">
+    <div className="content">
       <FontAwesomeIcon className="search-icon" icon={ faSearch } />
       <input ref={ query } placeholder="Track, artist or playlist" type="search" onChange={ (e) => runSearch(e) } />
       {
@@ -80,10 +80,10 @@ const Home = ({ setCurrentTrack, audioRef, playing, setPlaying, currentTrackId, 
         <>
           {
             Object.keys(response).length && (response.tracks.length || response.playlists.length) ?
-            <div class="results">
+            <div className="results">
               {
                 response?.tracks?.length ?
-                <div class="best-result">
+                <div className="best-result">
                   <p>Best result</p>
                   <BestResult
                     trackInfo={ response.tracks[0] }
@@ -96,12 +96,13 @@ const Home = ({ setCurrentTrack, audioRef, playing, setPlaying, currentTrackId, 
               }
               {
                 response?.tracks?.length ?
-                <div class="tracks-list small">
+                <div className="tracks-list small">
                   <p>Tracks</p>
                   {
                     response?.tracks?.map((trackInfo, index) =>
                       <div className="track-in">
                         <Track
+                          key={ index }
                           playing={ playing }
                           setPlaying={ setPlaying }
                           index={ index }
@@ -119,7 +120,7 @@ const Home = ({ setCurrentTrack, audioRef, playing, setPlaying, currentTrackId, 
               }
               {
                 response?.artists?.length ?
-                <div class="linear-list">
+                <div className="linear-list">
                   <h1>Artists</h1>
                   <SwipingList content={ response?.artists } />
                 </div>
@@ -138,7 +139,7 @@ const Home = ({ setCurrentTrack, audioRef, playing, setPlaying, currentTrackId, 
             <div className="no-results">{ query.current?.value.length ? 'Nothing found' : <>Good { getHours() }, <b>{ user ?? '...' }</b>!</> }</div>
           }
 
-          <button onClick={ signOut } class="sign-out">
+          <button onClick={ signOut } className="sign-out">
             <FontAwesomeIcon icon={ faSignOutAlt } />
             &nbsp;&nbsp;Sign Out&nbsp;
             <b>{ user }</b>
