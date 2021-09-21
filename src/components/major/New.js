@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import Cropper from 'react-easy-crop'
@@ -9,9 +9,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 import * as api from '../../api/index'
+import AppContext from '../../AppContext'
 
 
 const New = ({ myPlaylists, setMyPlaylists }) => {
+  const { userName } = useContext(AppContext)
   const constraints = ['.', '$', '#' , '[', ']', '/' , '?', '!', '@']
   const history = useHistory()
 
@@ -23,7 +25,7 @@ const New = ({ myPlaylists, setMyPlaylists }) => {
 
   const handlePlaylistCreation = async (e) => {
     e.preventDefault()
-    await api.createPlaylist(name, await cropImage(), 'konychevaleksei')
+    await api.createPlaylist(name, await cropImage(), userName)
     setMyPlaylists([...myPlaylists, name])
     history.push('/')
   }
