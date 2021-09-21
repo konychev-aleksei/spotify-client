@@ -42,7 +42,7 @@ const Topbar = () => {
 
 
   return(
-    <div class="top-bar">
+    <div className="top-bar">
       <button onClick={ handleLeft }>
         {
           showPlaylists ?
